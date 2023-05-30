@@ -41,8 +41,8 @@
             txtCodigo = new TextBox();
             lableTotal = new Label();
             bottonSalir = new FontAwesome.Sharp.IconButton();
-            button2 = new Button();
-            button3 = new Button();
+            btnDescuento15 = new Button();
+            btnDescuento20 = new Button();
             openFileDialogDescuento = new OpenFileDialog();
             btnDescuento = new Button();
             panelInfUsuario = new Panel();
@@ -160,23 +160,25 @@
             bottonSalir.UseVisualStyleBackColor = true;
             bottonSalir.Click += bottonSalir_Click;
             // 
-            // button2
+            // btnDescuento15
             // 
-            button2.Location = new Point(632, 367);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 9;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnDescuento15.Location = new Point(632, 367);
+            btnDescuento15.Name = "btnDescuento15";
+            btnDescuento15.Size = new Size(94, 29);
+            btnDescuento15.TabIndex = 9;
+            btnDescuento15.Text = "button2";
+            btnDescuento15.UseVisualStyleBackColor = true;
+            btnDescuento15.Click += btnDescuento15_Click;
             // 
-            // button3
+            // btnDescuento20
             // 
-            button3.Location = new Point(632, 402);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 10;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnDescuento20.Location = new Point(632, 402);
+            btnDescuento20.Name = "btnDescuento20";
+            btnDescuento20.Size = new Size(94, 29);
+            btnDescuento20.TabIndex = 10;
+            btnDescuento20.Text = "button3";
+            btnDescuento20.UseVisualStyleBackColor = true;
+            btnDescuento20.Click += btnDescuento20_Click;
             // 
             // openFileDialogDescuento
             // 
@@ -226,8 +228,8 @@
             Controls.Add(nomUsuario);
             Controls.Add(panelInfUsuario);
             Controls.Add(btnDescuento);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btnDescuento20);
+            Controls.Add(btnDescuento15);
             Controls.Add(bottonSalir);
             Controls.Add(lableTotal);
             Controls.Add(txtCodigo);
@@ -260,8 +262,8 @@
         private TextBox txtCodigo;
         private Label lableTotal;
         private FontAwesome.Sharp.IconButton bottonSalir;
-        private Button button2;
-        private Button button3;
+        private Button btnDescuento15;
+        private Button btnDescuento20;
         private OpenFileDialog openFileDialogDescuento;
         private Button btnDescuento;
         private Panel panelInfUsuario;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "82YH3AuXvVk/GtqZd5wr6CrwxgpbPhhk6ZoutpeGE5pH+9nytH382vjHQ+zMvEMCIrtRmyC42ZyKxLULK5bBsg==",
+  "dgSpecHash": "PB54i0Ta9pVDydZywgOYNxn5l1G0ZCkPsbMMj9xyOfnr87NjJ54RX3I5iyeAUjQ1eQkVsX4ihMvgjoxY1Wl6Ig==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Uesda\\source\\repos\\MyPoS\\PoS.-BD-para-Aplicaciones-main\\PoS\\PoS.csproj",
+  "projectFilePath": "C:\\Users\\Uesda\\source\\repos\\PuntoVentaBasedeDatos\\PoS\\PoS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Uesda\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
     "C:\\Users\\Uesda\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",

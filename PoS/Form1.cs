@@ -31,7 +31,13 @@ namespace PoS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //no djeamos habilitados los btn
             btnDescuento.Enabled = false;
+            btnDescuento15.Enabled = false;
+            btnDescuento20.Enabled = false;
+            
+            
+            //Le damos fondo al form
             this.BackgroundImage = Image.FromFile("..\\..\\..\\..\\logosForm\\fondoBurger.jpg");
             //ESTABLECEMOS EL LEABLE DANDOLE LA HORA Y FECHA. 
             HoraFecha.Text = DateTime.Now.ToLongTimeString() + " " + DateTime.Now.ToLongDateString();
@@ -114,18 +120,20 @@ namespace PoS
             btnDescuento.Location = new Point(10, titulo.Height +
                 Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height);
             btnDescuento.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
-            btnDescuento.Width = dataGridProductos.Columns[0].Width;
             btnDescuento.Text = "10%";
             btnDescuento.Font = new Font("Arial", 12);
-
-
-            button2.Location = new Point(10 + btnDescuento.Width + 10, ((titulo.Height +
+            //BTN15
+            btnDescuento15.Location = new Point(10 + btnDescuento.Width + 10, ((titulo.Height +
             Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height)));
-            button2.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
-            button3.Location = new Point(10 + button2.Width + btnDescuento.Width + 20, ((titulo.Height +
+            btnDescuento15.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
+            btnDescuento15.Text = "15%";
+            btnDescuento15.Font = new Font("Arial", 12);
+            //BTN20
+            btnDescuento20.Location = new Point(10 + btnDescuento15.Width + btnDescuento.Width + 20, ((titulo.Height +
             Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height)));
-            button3.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
-
+            btnDescuento20.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
+            btnDescuento20.Text = "20%";
+            btnDescuento20.Font = new Font("Arial", 12);
 
 
             //HACEMOS QUE EL MOUSE SIEMPRE APAREZCA EN EL TXT DEL CODIGO
@@ -183,9 +191,13 @@ namespace PoS
 
                         while (leer.Read())
                         {
-                            //DESPUÉS DE LEER AÑADIMOS LO QUE JALAMOS DE LA BASE DE DATOS Y LO PONEMOS EN RENGLONES EN EL DATAGRID, EN EL ORDEN DE LAS COLUMNAS
+                            //habilitamos los btn de descuento
                             btnDescuento.Enabled = true;
-                            rows = dataGridProductos.Rows.Add(cantidad.ToString(), leer.GetString(1), leer.GetDouble(2), (double.Parse(leer.GetString(2)) * double.Parse(cantidad.ToString())));
+                            btnDescuento15.Enabled = true;
+                            btnDescuento20.Enabled = true;
+                            //DESPUÉS DE LEER AÑADIMOS LO QUE JALAMOS DE LA BASE DE DATOS Y LO PONEMOS EN RENGLONES EN EL DATAGRID, EN EL ORDEN DE LAS COLUMNAS
+                            rows = dataGridProductos.Rows.Add(cantidad.ToString(), leer.GetString(1), Math.Round(leer.GetDouble(2),2), (double.Parse(leer.GetString(2)) * double.Parse(cantidad.ToString())));
+                            
                             //CREAMOS UN CICLO FOREACH PARA OBTENER LOS DATOS DEL TOTAL 
                             dataGridProductos.ClearSelection();
                             dataGridProductos.Rows[rows].Selected = true;
@@ -220,6 +232,23 @@ namespace PoS
                         if (double.Parse(txtCodigo.Text) > sumaTotal && sumaTotal != 0)
                         {
                             lableTotal.Text = "Cambio $ " + Math.Round((double.Parse(txtCodigo.Text) - sumaTotal), 2);
+                            comandoSelect = "INSERT INTO ventas(fecha,hora) VALUES(CURDATE(),CURTIME())";
+                            con.Open();
+                            comando = new MySqlCommand(comandoSelect,con);
+                            comando.ExecuteNonQuery();
+                            comandoSelect = "SELECT LAST_INSERT_id() FROM ventas";
+                            comando = new MySqlCommand(comandoSelect,con);
+                            String id = (comando.ExecuteScalar().ToString());
+                            
+                            //REGISTRAMOS DETALLES DE LA VENTA. 
+                            foreach (DataGridViewRow datos in dataGridProductos.Rows)
+                            {
+                                comandoSelect = $"INSERT INTO ventas_detalle(id_venta,cantidad,nombre,precio) VALUES('{id}','{datos.Cells[0].Value}','{datos.Cells[1].Value}','{datos.Cells[2].Value}');";
+                                comando = new MySqlCommand(comandoSelect,con);
+                                comando.ExecuteNonQuery();
+                            }
+                            
+                            
                             dataGridProductos.Rows.Clear();
                             sumaTotal = 0;//SE REINICIA LA VENTA PARA QUE SE SALGA DEL IF DE LA VENTA
 
@@ -228,11 +257,13 @@ namespace PoS
                 }
                 catch (Exception error)
                 {
+                    MessageBox.Show(error.ToString());
 
                 }
                 finally
                 {
                     txtCodigo.Clear();
+                    con.Close();
                 }
             }
             //----------------------------------BOTON PARA DUPLICAR PRODUCTO SELECCIONADO---------------------------------
@@ -240,6 +271,7 @@ namespace PoS
             {
                 try
                 {
+                    e.Handled = true;
                     if (dataGridProductos.Rows.Count > 0)
                     {
                         DataGridViewRow lastRow = dataGridProductos.Rows[dataGridProductos.Rows.Count - 1];
@@ -251,6 +283,7 @@ namespace PoS
                         // Agregar una nueva fila con los mismos valores
                         dataGridProductos.Rows.Add(cellValues);
                         actualizarPrecio();
+                        txtCodigo.Clear();
 
                     }
                 }
@@ -260,12 +293,12 @@ namespace PoS
                 }
                 finally
                 {
-                    txtCodigo.Clear();
                 }
             }
             //-------------------BOTÓN PARA ELIMINAR PRODUCTO SELECCIONADO----------------------------------------
             if (e.KeyChar == '{' || e.KeyChar == '{')
             {
+                e.Handled = true;
                 try
                 {
                     if (dataGridProductos.Rows.Count > 0)
@@ -290,20 +323,48 @@ namespace PoS
             this.Close();
         }
         private void btnDescuento_Click(object sender, EventArgs e)
-        { 
-            if(btnDescuento != null)
+        {
+            if (btnDescuento != null)
             {
                 descuento = (sumaTotal * 10) / 100;
-                sumaTotal = sumaTotal - descuento; 
+                sumaTotal = sumaTotal - descuento;
                 lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
                 btnDescuento.Enabled = false;
-                if (dataGridProductos.Rows.Count==null)
+                if (dataGridProductos.Rows.Count == null)
                 {
-                    btnDescuento.Enabled = true; 
+                    btnDescuento.Enabled = true;
                 }
             }
         }
-        
+        private void btnDescuento15_Click(object sender, EventArgs e)
+        {
+            if (btnDescuento15 != null)
+            {
+                descuento = (sumaTotal * 15) / 100;
+                sumaTotal = sumaTotal - descuento;
+                lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
+                btnDescuento.Enabled = false;
+                if (dataGridProductos.Rows.Count == null)
+                {
+                    btnDescuento15.Enabled = true;
+                }
+            }
+        }
+        private void btnDescuento20_Click(object sender, EventArgs e)
+        {
+            if (btnDescuento20 != null)
+            {
+                descuento = (sumaTotal * 20) / 100;
+                sumaTotal = sumaTotal - descuento;
+                lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
+                btnDescuento.Enabled = false;
+                if (dataGridProductos.Rows.Count == null)
+                {
+                    btnDescuento20.Enabled = true;
+                }
+            }
+        }
+
         //------------------------------MÉTODO PARA ACTUALIZAR EL PRECIO------------------------------------
         private void actualizarPrecio()
         {
@@ -320,6 +381,7 @@ namespace PoS
             }
         }
     }
+
 }
 
 

@@ -1744,11 +1744,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Uesda\\source\\repos\\MyPoS\\PoS.-BD-para-Aplicaciones-main\\PoS\\PoS.csproj",
+      "projectUniqueName": "C:\\Users\\Uesda\\source\\repos\\PuntoVentaBasedeDatos\\PoS\\PoS.csproj",
       "projectName": "PoS",
-      "projectPath": "C:\\Users\\Uesda\\source\\repos\\MyPoS\\PoS.-BD-para-Aplicaciones-main\\PoS\\PoS.csproj",
+      "projectPath": "C:\\Users\\Uesda\\source\\repos\\PuntoVentaBasedeDatos\\PoS\\PoS.csproj",
       "packagesPath": "C:\\Users\\Uesda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Uesda\\source\\repos\\MyPoS\\PoS.-BD-para-Aplicaciones-main\\PoS\\obj\\",
+      "outputPath": "C:\\Users\\Uesda\\source\\repos\\PuntoVentaBasedeDatos\\PoS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

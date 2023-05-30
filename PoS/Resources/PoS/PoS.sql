@@ -12,3 +12,12 @@ INSERT INTO productos (codigo, nombre, precio) VALUES
 ("7","Sabritones","65.66"),
 ("8","Tarjeta del Yugio","100.10"),
 ("9","Agua Purificada","13.99");
+
+
+CREATE TABLE ventas (
+	id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	fecha DATE,
+	hora TIME
+);
+
+CREATE TABLE ventas_detalle(id_venta BIGINT UNSIGNED NOT NULL, cantidad INT UNSIGNED NOT NULL, nombre varchar(255) NOT NULL, precio FLOAT(6,2) UNSIGNED NOT NULL, FOREIGN KEY(id_venta) REFERENCES ventas(id));
