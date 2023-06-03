@@ -9,7 +9,8 @@
       "PoS/1.0.0": {
         "dependencies": {
           "FontAwesome.Sharp": "6.3.0",
-          "MySql.Data": "8.0.33"
+          "MySql.Data": "8.0.33",
+          "LibPrintTicket": "1.0.0.0"
         },
         "runtime": {
           "PoS.dll": {}
@@ -251,6 +252,14 @@
         "dependencies": {
           "System.Drawing.Common": "4.7.0"
         }
+      },
+      "LibPrintTicket/1.0.0.0": {
+        "runtime": {
+          "LibPrintTicket.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -476,6 +485,11 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "LibPrintTicket/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

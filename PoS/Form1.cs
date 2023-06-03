@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Drawing.Text;
 using System.Linq.Expressions;
 using MySqlX.XDevAPI.Relational;
+using LibPrintTicket;
 
 namespace PoS
 {
@@ -35,8 +36,8 @@ namespace PoS
             btnDescuento.Enabled = false;
             btnDescuento15.Enabled = false;
             btnDescuento20.Enabled = false;
-            
-            
+
+
             //Le damos fondo al form
             this.BackgroundImage = Image.FromFile("..\\..\\..\\..\\logosForm\\fondoBurger.jpg");
             //ESTABLECEMOS EL LEABLE DANDOLE LA HORA Y FECHA. 
@@ -196,8 +197,8 @@ namespace PoS
                             btnDescuento15.Enabled = true;
                             btnDescuento20.Enabled = true;
                             //DESPUÉS DE LEER AÑADIMOS LO QUE JALAMOS DE LA BASE DE DATOS Y LO PONEMOS EN RENGLONES EN EL DATAGRID, EN EL ORDEN DE LAS COLUMNAS
-                            rows = dataGridProductos.Rows.Add(cantidad.ToString(), leer.GetString(1), Math.Round(leer.GetDouble(2),2), (double.Parse(leer.GetString(2)) * double.Parse(cantidad.ToString())));
-                            
+                            rows = dataGridProductos.Rows.Add(cantidad.ToString(), leer.GetString(1), Math.Round(leer.GetDouble(2), 2), (double.Parse(leer.GetString(2)) * double.Parse(cantidad.ToString())));
+
                             //CREAMOS UN CICLO FOREACH PARA OBTENER LOS DATOS DEL TOTAL 
                             dataGridProductos.ClearSelection();
                             dataGridProductos.Rows[rows].Selected = true;
@@ -234,21 +235,21 @@ namespace PoS
                             lableTotal.Text = "Cambio $ " + Math.Round((double.Parse(txtCodigo.Text) - sumaTotal), 2);
                             comandoSelect = "INSERT INTO ventas(fecha,hora) VALUES(CURDATE(),CURTIME())";
                             con.Open();
-                            comando = new MySqlCommand(comandoSelect,con);
+                            comando = new MySqlCommand(comandoSelect, con);
                             comando.ExecuteNonQuery();
                             comandoSelect = "SELECT LAST_INSERT_id() FROM ventas";
-                            comando = new MySqlCommand(comandoSelect,con);
+                            comando = new MySqlCommand(comandoSelect, con);
                             String id = (comando.ExecuteScalar().ToString());
-                            
+
                             //REGISTRAMOS DETALLES DE LA VENTA. 
                             foreach (DataGridViewRow datos in dataGridProductos.Rows)
                             {
                                 comandoSelect = $"INSERT INTO ventas_detalle(id_venta,cantidad,nombre,precio) VALUES('{id}','{datos.Cells[0].Value}','{datos.Cells[1].Value}','{datos.Cells[2].Value}');";
-                                comando = new MySqlCommand(comandoSelect,con);
+                                comando = new MySqlCommand(comandoSelect, con);
                                 comando.ExecuteNonQuery();
                             }
-                            
-                            
+
+
                             dataGridProductos.Rows.Clear();
                             sumaTotal = 0;//SE REINICIA LA VENTA PARA QUE SE SALGA DEL IF DE LA VENTA
 
@@ -379,6 +380,23 @@ namespace PoS
                 }
                 lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Ticket ticket = new Ticket();
+                ticket.AddSubHeaderLine(DateTime.Now.ToShortDateString().ToString());
+                ticket.AddSubHeaderLine(DateTime.Now.ToShortTimeString().ToString());
+                ticket.AddFooterLine("GRACIAS POR SU COMPRA");
+                ticket.PrintTicket("EC-PM-5890X");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IMPRESORA NO CONECTADA. ");
+            }
+
         }
     }
 

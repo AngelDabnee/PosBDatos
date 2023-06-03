@@ -48,6 +48,7 @@
             panelInfUsuario = new Panel();
             nomUsuario = new Label();
             pictureBoxUsuario = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridProductos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxUsuario).BeginInit();
@@ -57,9 +58,9 @@
             // 
             titulo.AutoSize = true;
             titulo.Font = new Font("Arial Black", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            titulo.Location = new Point(222, 23);
+            titulo.Location = new Point(194, 17);
             titulo.Name = "titulo";
-            titulo.Size = new Size(277, 42);
+            titulo.Size = new Size(226, 33);
             titulo.TabIndex = 0;
             titulo.Text = "DabneeBurger's";
             // 
@@ -67,18 +68,18 @@
             // 
             Desarrollado.AutoSize = true;
             Desarrollado.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Desarrollado.Location = new Point(398, 90);
+            Desarrollado.Location = new Point(348, 68);
             Desarrollado.Name = "Desarrollado";
-            Desarrollado.Size = new Size(0, 24);
+            Desarrollado.Size = new Size(0, 20);
             Desarrollado.TabIndex = 1;
             // 
             // HoraFecha
             // 
             HoraFecha.AutoSize = true;
             HoraFecha.Font = new Font("Arial Narrow", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            HoraFecha.Location = new Point(397, 148);
+            HoraFecha.Location = new Point(347, 111);
             HoraFecha.Name = "HoraFecha";
-            HoraFecha.Size = new Size(109, 24);
+            HoraFecha.Size = new Size(89, 20);
             HoraFecha.TabIndex = 2;
             HoraFecha.Text = "Hora y Fecha";
             // 
@@ -109,21 +110,23 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridProductos.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridProductos.Location = new Point(289, 206);
+            dataGridProductos.Location = new Point(253, 154);
+            dataGridProductos.Margin = new Padding(3, 2, 3, 2);
             dataGridProductos.Name = "dataGridProductos";
             dataGridProductos.ReadOnly = true;
             dataGridProductos.RowHeadersVisible = false;
             dataGridProductos.RowHeadersWidth = 51;
             dataGridProductos.RowTemplate.Height = 29;
-            dataGridProductos.Size = new Size(300, 188);
+            dataGridProductos.Size = new Size(262, 141);
             dataGridProductos.TabIndex = 3;
             // 
             // pictureBoxLogo
             // 
             pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
-            pictureBoxLogo.Location = new Point(654, 133);
+            pictureBoxLogo.Location = new Point(572, 100);
+            pictureBoxLogo.Margin = new Padding(3, 2, 3, 2);
             pictureBoxLogo.Name = "pictureBoxLogo";
-            pictureBoxLogo.Size = new Size(125, 62);
+            pictureBoxLogo.Size = new Size(109, 46);
             pictureBoxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxLogo.TabIndex = 4;
             pictureBoxLogo.TabStop = false;
@@ -131,9 +134,10 @@
             // txtCodigo
             // 
             txtCodigo.Font = new Font("Arial Narrow", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCodigo.Location = new Point(159, 109);
+            txtCodigo.Location = new Point(139, 82);
+            txtCodigo.Margin = new Padding(3, 2, 3, 2);
             txtCodigo.Name = "txtCodigo";
-            txtCodigo.Size = new Size(125, 76);
+            txtCodigo.Size = new Size(110, 63);
             txtCodigo.TabIndex = 5;
             txtCodigo.KeyPress += txtCodigo_KeyPress;
             txtCodigo.PreviewKeyDown += txtCodigo_PreviewKeyDown;
@@ -141,9 +145,9 @@
             // lableTotal
             // 
             lableTotal.AutoSize = true;
-            lableTotal.Location = new Point(638, 262);
+            lableTotal.Location = new Point(558, 196);
             lableTotal.Name = "lableTotal";
-            lableTotal.Size = new Size(88, 20);
+            lableTotal.Size = new Size(68, 15);
             lableTotal.TabIndex = 6;
             lableTotal.Text = "Total: $ 0.00";
             // 
@@ -152,9 +156,10 @@
             bottonSalir.IconChar = FontAwesome.Sharp.IconChar.None;
             bottonSalir.IconColor = Color.Black;
             bottonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            bottonSalir.Location = new Point(126, 288);
+            bottonSalir.Location = new Point(110, 216);
+            bottonSalir.Margin = new Padding(3, 2, 3, 2);
             bottonSalir.Name = "bottonSalir";
-            bottonSalir.Size = new Size(94, 29);
+            bottonSalir.Size = new Size(82, 22);
             bottonSalir.TabIndex = 7;
             bottonSalir.Tag = "";
             bottonSalir.UseVisualStyleBackColor = true;
@@ -162,9 +167,10 @@
             // 
             // btnDescuento15
             // 
-            btnDescuento15.Location = new Point(632, 367);
+            btnDescuento15.Location = new Point(553, 275);
+            btnDescuento15.Margin = new Padding(3, 2, 3, 2);
             btnDescuento15.Name = "btnDescuento15";
-            btnDescuento15.Size = new Size(94, 29);
+            btnDescuento15.Size = new Size(82, 22);
             btnDescuento15.TabIndex = 9;
             btnDescuento15.Text = "button2";
             btnDescuento15.UseVisualStyleBackColor = true;
@@ -172,9 +178,10 @@
             // 
             // btnDescuento20
             // 
-            btnDescuento20.Location = new Point(632, 402);
+            btnDescuento20.Location = new Point(553, 302);
+            btnDescuento20.Margin = new Padding(3, 2, 3, 2);
             btnDescuento20.Name = "btnDescuento20";
-            btnDescuento20.Size = new Size(94, 29);
+            btnDescuento20.Size = new Size(82, 22);
             btnDescuento20.TabIndex = 10;
             btnDescuento20.Text = "button3";
             btnDescuento20.UseVisualStyleBackColor = true;
@@ -186,9 +193,10 @@
             // 
             // btnDescuento
             // 
-            btnDescuento.Location = new Point(632, 332);
+            btnDescuento.Location = new Point(553, 249);
+            btnDescuento.Margin = new Padding(3, 2, 3, 2);
             btnDescuento.Name = "btnDescuento";
-            btnDescuento.Size = new Size(94, 29);
+            btnDescuento.Size = new Size(82, 22);
             btnDescuento.TabIndex = 11;
             btnDescuento.Text = "button1";
             btnDescuento.UseVisualStyleBackColor = true;
@@ -196,34 +204,47 @@
             // 
             // panelInfUsuario
             // 
-            panelInfUsuario.Location = new Point(529, 2);
+            panelInfUsuario.Location = new Point(463, 2);
+            panelInfUsuario.Margin = new Padding(3, 2, 3, 2);
             panelInfUsuario.Name = "panelInfUsuario";
-            panelInfUsuario.Size = new Size(250, 125);
+            panelInfUsuario.Size = new Size(219, 94);
             panelInfUsuario.TabIndex = 12;
             // 
             // nomUsuario
             // 
             nomUsuario.AutoSize = true;
-            nomUsuario.Location = new Point(535, 168);
+            nomUsuario.Location = new Point(468, 126);
             nomUsuario.Name = "nomUsuario";
-            nomUsuario.Size = new Size(50, 20);
+            nomUsuario.Size = new Size(38, 15);
             nomUsuario.TabIndex = 13;
             nomUsuario.Text = "label1";
             // 
             // pictureBoxUsuario
             // 
-            pictureBoxUsuario.Location = new Point(53, 38);
+            pictureBoxUsuario.Location = new Point(46, 28);
+            pictureBoxUsuario.Margin = new Padding(3, 2, 3, 2);
             pictureBoxUsuario.Name = "pictureBoxUsuario";
-            pictureBoxUsuario.Size = new Size(125, 65);
+            pictureBoxUsuario.Size = new Size(109, 49);
             pictureBoxUsuario.TabIndex = 14;
             pictureBoxUsuario.TabStop = false;
             // 
+            // button1
+            // 
+            button1.Location = new Point(596, 171);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 15;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
+            Controls.Add(button1);
             Controls.Add(pictureBoxUsuario);
             Controls.Add(nomUsuario);
             Controls.Add(panelInfUsuario);
@@ -239,6 +260,7 @@
             Controls.Add(Desarrollado);
             Controls.Add(titulo);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -269,5 +291,6 @@
         private Panel panelInfUsuario;
         private Label nomUsuario;
         private PictureBox pictureBoxUsuario;
+        private Button button1;
     }
 }
