@@ -127,7 +127,6 @@ C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\bin\Debug\net6.0-windows\r
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.csproj.AssemblyReference.cache
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.Form1.resources
-C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.FormDescuento.resources
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.Properties.Resources.resources
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.csproj.GenerateResource.cache
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.GeneratedMSBuildEditorConfig.editorconfig
@@ -141,3 +140,4 @@ C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\P
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.genruntimeconfig.cache
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\ref\PoS.dll
 C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\bin\Debug\net6.0-windows\LibPrintTicket.dll
+C:\Users\Uesda\source\repos\PuntoVentaBasedeDatos\PoS\obj\Debug\net6.0-windows\PoS.FormSecreto.resources

@@ -10,6 +10,7 @@ using System.Drawing.Text;
 using System.Linq.Expressions;
 using MySqlX.XDevAPI.Relational;
 using LibPrintTicket;
+using FontAwesome.Sharp;
 
 namespace PoS
 {
@@ -39,19 +40,30 @@ namespace PoS
 
 
             //Le damos fondo al form
-            this.BackgroundImage = Image.FromFile("..\\..\\..\\..\\logosForm\\fondoBurger.jpg");
+            //this.BackgroundImage = Image.FromFile("..\\..\\..\\..\\logosForm\\fondoBurger.jpg");
+
+            //colocamos un fondo
+            this.BackColor = SystemColors.Menu;
+
             //ESTABLECEMOS EL LEABLE DANDOLE LA HORA Y FECHA. 
             HoraFecha.Text = DateTime.Now.ToLongTimeString() + " " + DateTime.Now.ToLongDateString();
+            HoraFecha.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
             //Localizacion del lable, con la linea 13, hacemos que se localice en la mitad.
-            titulo.Location = new Point((this.Width / 2) - (titulo.Width / 2), 0);//ESTE LO LOCALIZAMOS EN EL CENTRO
+            titulo.Location = new Point((this.Width / 2) - (titulo.Width / 2), 20);//ESTE LO LOCALIZAMOS EN EL CENTRO
+            titulo.Font = new Font("Arial", 30F, FontStyle.Bold);
+            titulo.Font = new Font("Arial", 30F, FontStyle.Underline);
+            titulo.Font = new Font("Arial", 30F, FontStyle.Italic);
+            titulo.AutoSize = true;
             //Centramos el desarrollado por, sobre el titulo que realizamos la inicio. 
-            Desarrollado.Location = new Point(((this.Width / 2) - (Desarrollado.Width / 2)) - pictureBoxLogo.Width, titulo.Height);//SE LOCALIZA EN EL CENTRO PERO LE DEBEMOS DE SUMAR LA ALTURA YA ESTABLECIDA DEL TITULO INICIAL
-            Desarrollado.Text = "";
+            desarrolladoPor.Location = new Point(dataGridProductos.Width + panelInfUsuario.Width + btn1.Width + txtCodigo.Width + pictureBoxUsuario.Width + btn3.Width + titulo.Width - bottonSalir.Width - 45, pictureBoxLogo.Height - HoraFecha.Height);
+            desarrolladoPor.Text = "Atendido por: Angel Dabnee";
+            desarrolladoPor.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
+            desarrolladoPor.AutoSize = true;
             //Hora y fecha está a altura sumada de lo que vale titulo, desarrollado, centrado. 
-            HoraFecha.Location = new Point((this.Width / 2) - (HoraFecha.Width / 2), (titulo.Height + Desarrollado.Height));//SE ESTABLECE EN EL CENTOR DEBAJO DEL TITULO ANTERIOR
+            HoraFecha.Location = new Point(10 + dataGridProductos.Width + panelInfUsuario.Width + pictureBoxLogo.Width + titulo.Width + txtCodigo.Width + btn3.Width, (titulo.Height + Desarrollado.Height));//SE ESTABLECE EN EL CENTOR DEBAJO DEL TITULO ANTERIOR
             //Localizamos el datagrid, según al nivel de hora y fecha
             dataGridProductos.Location = new Point((10), (titulo.Height + Desarrollado.Height + HoraFecha.Height));//CENTRAMOS EL DATAGRID SEPARANDOLO 10 PIXELES DE CADA LADO
-            dataGridProductos.Width = (this.Width / 4) * 3 - 20;//Con esto separamos 10 pixeles entre el objeto y la ventana, de cada lado. 
+            dataGridProductos.Width = (this.Width / 2) - 20;//Con esto separamos 10 pixeles entre el objeto y la ventana, de cada lado. 
             dataGridProductos.Height = (this.Height / 4) * 3;//Con esto le damos al 3/4 segun la altura DE TODOS LOS PIXELES
             dataGridProductos.BackgroundColor = Color.White;
             //doy pie a que se mantenga seleccionada la ultima celda
@@ -60,41 +72,106 @@ namespace PoS
             txtCodigo.Location = new Point((10), this.Height - txtCodigo.Height);
             txtCodigo.Width = this.Width - 20;//esta segun el nivel del data grid. 
             //COLOCAMOS LA LOCALIZACIÓN DEL PANEL. 
-            panelInfUsuario.Location = new Point(20 + dataGridProductos.Width, this.Height - panelInfUsuario.Height - txtCodigo.Height - dataGridProductos.Height + HoraFecha.Height);
-            panelInfUsuario.Width = this.Width;
+            panelInfUsuario.Location = new Point(30 + dataGridProductos.Width - 10, (titulo.Height + Desarrollado.Height + HoraFecha.Height));
+            panelInfUsuario.Width = this.Width / 2;//localizamos el panel a la misma propocion que el datagrid
             panelInfUsuario.Height = (this.Height / 4) * 3;
             panelInfUsuario.BackColor = Color.White;
-            panelInfUsuario.BorderStyle = BorderStyle.Fixed3D;
-            //LOCALIZAMOS LEABLES DENTRO DEL PANEL 
-            nomUsuario.Location = new Point(30 + dataGridProductos.Width, 10 + this.Height + nomUsuario.Height - txtCodigo.Height - dataGridProductos.Height + HoraFecha.Height - titulo.Height + pictureBoxLogo.Height + pictureBoxUsuario.Height);
-            nomUsuario.Text = "Nombre del Cajero: " + "";
-            nomUsuario.Font = new Font("Arial", 18F, FontStyle.Bold);
-            nomUsuario.Width = this.Width + panelInfUsuario.Width;
-            nomUsuario.AutoSize = true;
+
             //LOCALIZAR EL PICTUREBOX DEL USUARIO.
-            pictureBoxUsuario.Location = new Point((panelInfUsuario.Width + dataGridProductos.Width) / 2 - bottonSalir.Width, 10 + this.Height - nomUsuario.Height - txtCodigo.Height - dataGridProductos.Height - HoraFecha.Height - titulo.Height);
+            pictureBoxUsuario.Location = new Point(((panelInfUsuario.Width + dataGridProductos.Width) / 4) * 3 - bottonSalir.Width, titulo.Height + pictureBoxLogo.Height + HoraFecha.Height);
             pictureBoxUsuario.Width = this.Width;
-            pictureBoxUsuario.Height = pictureBoxUsuario.Height + nomUsuario.Height + dataGridProductos.Height / 8;
+            pictureBoxUsuario.Height = pictureBoxUsuario.Height + dataGridProductos.Height / 8;
             pictureBoxUsuario.Image = Image.FromFile("..\\..\\..\\..\\logosForm\\usuarioPerfil.jpg");
             pictureBoxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxUsuario.BackColor = Color.White;
+
+            //Acomodo de los botones de calculadora de los paneles. 
+            btn1.Location = new Point(10 + panelInfUsuario.Width, dataGridProductos.Height / 2);
+            btn1.Text = "1";
+            btn1.Font = new Font("Microsoft Sans Serif", 40F);
+            btn1.AutoSize = true;
+            //btn2
+            btn2.Location = new Point(10 + panelInfUsuario.Width + btn1.Width, dataGridProductos.Height / 2);
+            btn2.Text = "2";
+            btn2.Font = new Font("Microsoft Sans Serif", 40F);
+            btn2.AutoSize = true;
+            //btn3
+            btn3.Location = new Point(10 + panelInfUsuario.Width + btn1.Width + btn2.Width, dataGridProductos.Height / 2);
+            btn3.Text = "3";
+            btn3.Font = new Font("Microsoft Sans Serif", 40F);
+            btn3.AutoSize = true;
+            //btn4
+            btn4.Location = new Point(10 + panelInfUsuario.Width, btn1.Height + (dataGridProductos.Height / 2));
+            btn4.Text = "4";
+            btn4.Font = new Font("Microsoft Sans Serif", 40F);
+            btn4.AutoSize = true;
+            //btn5
+            btn5.Location = new Point(10 + panelInfUsuario.Width + btn1.Width, btn2.Height + (dataGridProductos.Height / 2));
+            btn5.Text = "5";
+            btn5.Font = new Font("Microsoft Sans Serif", 40F);
+            btn5.AutoSize = true;
+            //btn6
+            btn6.Location = new Point(10 + panelInfUsuario.Width + btn1.Width + btn2.Width, btn3.Height + (dataGridProductos.Height / 2));
+            btn6.Text = "6";
+            btn6.Font = new Font("Microsoft Sans Serif", 40F);
+            btn6.AutoSize = true;
+            //btn7
+            btn7.Location = new Point(10 + panelInfUsuario.Width, btn1.Height + btn4.Height + (dataGridProductos.Height / 2));
+            btn7.Text = "7";
+            btn7.Font = new Font("Microsoft Sans Serif", 40F);
+            btn7.AutoSize = true;
+            //btn8
+            btn8.Location = new Point(10 + panelInfUsuario.Width + btn7.Width, btn1.Height + btn4.Height + (dataGridProductos.Height / 2));
+            btn8.Text = "8";
+            btn8.Font = new Font("Microsoft Sans Serif", 40F);
+            btn8.AutoSize = true;
+            //btn9
+            btn9.Location = new Point(10 + panelInfUsuario.Width + btn7.Width + btn8.Width, btn1.Height + btn4.Height + (dataGridProductos.Height / 2));
+            btn9.Text = "9";
+            btn9.Font = new Font("Microsoft Sans Serif", 40F);
+            btn9.AutoSize = true;
+            //btn0
+            btn0.Location = new Point(10 + panelInfUsuario.Width + btnPunto.Width, btn1.Height + btn4.Height + btn7.Height + (dataGridProductos.Height / 2));
+            btn0.Text = "0";
+            btn0.Font = new Font("Microsoft Sans Serif", 40F);
+            btn0.AutoSize = true;
+            //btnPunto
+            btnPunto.Location = new Point(10 + panelInfUsuario.Width, btn1.Height + btn4.Height + btn7.Height + (dataGridProductos.Height / 2));
+            btnPunto.Text = ".";
+            btnPunto.Font = new Font("Microsoft Sans Serif", 40F);
+            btnPunto.AutoSize = true;
+            //btnBorrar
+            btnBorrar.Location = new Point(10 + panelInfUsuario.Width + btnPunto.Width + btn0.Width, btn1.Height + btn4.Height + btn7.Height + (dataGridProductos.Height / 2));
+            btnBorrar.Text = "x";
+            btnBorrar.Font = new Font("Microsoft Sans Serif", 40F);
+            btnBorrar.AutoSize = true;
+            //btnSecreto
+            btnSecreto.Location = new Point(10 + panelInfUsuario.Width + btn1.Width + btn2.Width + btn3.Width, dataGridProductos.Height / 2);
+            btnSecreto.Height = this.Height + btn3.Height + btn6.Height - txtCodigo.Height - lableTotal.Height - panelInfUsuario.Height;
+            btnSecreto.Text = "ENTER";
+            btnPunto.Font = new Font("Microsoft Sans Serif", 40F);
+            btnSecreto.AutoSize = true;
+
+
             //AÑADIMOS COLUMNAS, NOMBRES, EDITAMOS EL ESTILO Y DETERMINAMOS EL TAMAÑO
             //INICIAMOS ESTABLECIENDO LAS PROPIEDADES DE CANTIDAD. 
             dataGridProductos.Columns.Add("Cantidad", "Cantidad");//Aqui añadimos las columnas. 
-            dataGridProductos.Columns[0].HeaderCell.Style.Font = new Font("Arial", 25F, FontStyle.Bold);//Esta es la propiedad para cambiarle el tipo de letra tamaño
-            dataGridProductos.Columns[0].Width = (dataGridProductos.Width * 15) / 100;//Damos el tamaño de cada columna
+            dataGridProductos.Columns[0].HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);//Esta es la propiedad para cambiarle el tipo de letra tamaño
+            dataGridProductos.Columns[0].Width = (dataGridProductos.Width * 20) / 100;//Damos el tamaño de cada columna
             //SE ESTABLECE LAS PROPIEDADES DE LA COLUMNA NOMBRE
             dataGridProductos.Columns.Add("Nombre", "Nombre");//Aqui añadimos las columnas. 
-            dataGridProductos.Columns[1].Width = ((dataGridProductos.Width) * 45) / 100;//Damos el tamaño de la columna 2
-            dataGridProductos.Columns[1].HeaderCell.Style.Font = new Font("Arial", 25F, FontStyle.Bold);
+            dataGridProductos.Columns[1].Width = ((dataGridProductos.Width) * 40) / 100;//Damos el tamaño de la columna 2
+            dataGridProductos.Columns[1].HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
+            dataGridProductos.Columns[1].HeaderCell.Style.Font = new Font("Arial", 20F, FontStyle.Bold);
+
             //SE ESTABLECE LAS PRROPIEDADES DE LA COLUMNA PRECIO
             dataGridProductos.Columns.Add("Precio", "Precio");//Aqui añadimos las columnas. 
             dataGridProductos.Columns[2].Width = ((dataGridProductos.Width) * 20) / 100;//tamaño de la columna 3
-            dataGridProductos.Columns[2].HeaderCell.Style.Font = new Font("Arial", 25F, FontStyle.Bold);
+            dataGridProductos.Columns[2].HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
             //SE ESTABLECE LAS PROPIEDADES DE LA COLUMNA TOTAL
             dataGridProductos.Columns.Add("Total", "Total");//Aqui añadimos las columnas. 
             dataGridProductos.Columns[3].Width = ((dataGridProductos.Width) * 20) / 100;//tamaño de la columna 4 
-            dataGridProductos.Columns[3].HeaderCell.Style.Font = new Font("Arial", 25F, FontStyle.Bold);
+            dataGridProductos.Columns[3].HeaderCell.Style.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
             //AGREGAR EL FORMATO PARA MONEDA
             dataGridProductos.Columns[3].DefaultCellStyle.Format = "C2";
             dataGridProductos.Columns[2].DefaultCellStyle.Format = "C2";
@@ -114,27 +191,35 @@ namespace PoS
             //CAMBIAMOS LA POSICIÓN DEL TXT TOTAL SUMANDO LAS POSICIONES DE ALGUNOS DE LOS COMPONENTES DE ESTE. 
             int posicion = (this.Height - (titulo.Height + Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height + txtCodigo.Height));
             lableTotal.Location = new Point(10 + dataGridProductos.Columns[0].Width +
-                dataGridProductos.Columns[1].Width + dataGridProductos.Columns[2].Width, (titulo.Height +
+                dataGridProductos.Columns[1].Width + dataGridProductos.Columns[2].Width - btn1.Width, (titulo.Height +
                 Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height) + posicion / 4);
+
+
+
+
+
             //ACOMODO DE LOS BOTONES ADICIONALES
             //botones de descuento
             btnDescuento.Location = new Point(10, titulo.Height +
                 Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height);
             btnDescuento.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
             btnDescuento.Text = "10%";
-            btnDescuento.Font = new Font("Arial", 12);
+            btnDescuento.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
+            btnDescuento.AutoSize = true;
             //BTN15
             btnDescuento15.Location = new Point(10 + btnDescuento.Width + 10, ((titulo.Height +
             Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height)));
             btnDescuento15.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
             btnDescuento15.Text = "15%";
-            btnDescuento15.Font = new Font("Arial", 12);
+            btnDescuento15.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
+            btnDescuento15.AutoSize = true;
             //BTN20
             btnDescuento20.Location = new Point(10 + btnDescuento15.Width + btnDescuento.Width + 20, ((titulo.Height +
             Desarrollado.Height + HoraFecha.Height + dataGridProductos.Height)));
             btnDescuento20.Height = this.Height - titulo.Height - Desarrollado.Height - HoraFecha.Height - dataGridProductos.Height - txtCodigo.Height;
             btnDescuento20.Text = "20%";
-            btnDescuento20.Font = new Font("Arial", 12);
+            btnDescuento20.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
+            btnDescuento20.AutoSize = true;
 
 
             //HACEMOS QUE EL MOUSE SIEMPRE APAREZCA EN EL TXT DEL CODIGO
@@ -232,6 +317,7 @@ namespace PoS
 
                         if (double.Parse(txtCodigo.Text) > sumaTotal && sumaTotal != 0)
                         {
+                            e.Handled = true;
                             lableTotal.Text = "Cambio $ " + Math.Round((double.Parse(txtCodigo.Text) - sumaTotal), 2);
                             comandoSelect = "INSERT INTO ventas(fecha,hora) VALUES(CURDATE(),CURTIME())";
                             con.Open();
@@ -241,7 +327,7 @@ namespace PoS
                             comando = new MySqlCommand(comandoSelect, con);
                             String id = (comando.ExecuteScalar().ToString());
 
-                            //REGISTRAMOS DETALLES DE LA VENTA. 
+                            //---------------------REGISTRAMOS DETALLES DE LA VENTA. ---------------------------------------
                             foreach (DataGridViewRow datos in dataGridProductos.Rows)
                             {
                                 comandoSelect = $"INSERT INTO ventas_detalle(id_venta,cantidad,nombre,precio) VALUES('{id}','{datos.Cells[0].Value}','{datos.Cells[1].Value}','{datos.Cells[2].Value}');";
@@ -325,6 +411,7 @@ namespace PoS
         }
         private void btnDescuento_Click(object sender, EventArgs e)
         {
+            calibrado();
             if (btnDescuento != null)
             {
                 descuento = (sumaTotal * 10) / 100;
@@ -381,8 +468,7 @@ namespace PoS
                 lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void calibrado()
         {
             try
             {
@@ -396,7 +482,134 @@ namespace PoS
             {
                 MessageBox.Show("IMPRESORA NO CONECTADA. ");
             }
+        }
+        //-------------------------------------REGION DE LOS BOTONES DE LA CALCULADORA------------------------
+        #region
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "1";
+                txtCodigo.Focus();
+            }
 
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "2";
+                txtCodigo.Focus();
+            }
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "3";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn4_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "4";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn5_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "5";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn6_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "6";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn7_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "7";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn8_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "8";
+                txtCodigo.Focus();
+
+            }
+        }
+
+        private void btn9_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "9";
+                txtCodigo.Focus();
+
+            }
+        }
+        #endregion
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += "0";
+                txtCodigo.Focus();
+            }
+
+        }
+
+        private void btnPunto_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != null)
+            {
+                txtCodigo.Text += ".";
+                txtCodigo.Focus();
+            }
+        }
+
+        private void btnSecreto_Click(object sender, EventArgs e)
+        {
+            Form formSecreto = new FormSecreto();
+            formSecreto.ShowDialog();
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text.Length > 1)
+            {
+                txtCodigo.Text = txtCodigo.Text.Substring(0, txtCodigo.Text.Length - 1);
+            }
+            else 
+            {
+                txtCodigo.Text = ""; 
+            }
         }
     }
 
