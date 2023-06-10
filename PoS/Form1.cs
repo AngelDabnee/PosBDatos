@@ -334,8 +334,12 @@ namespace PoS
                                 comando = new MySqlCommand(comandoSelect, con);
                                 comando.ExecuteNonQuery();
                             }
-
-
+                            //imprimir
+                            printDocument1.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("pprnm", 207, 600);
+                            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                            {
+                                printDocument1.Print();
+                            }
                             dataGridProductos.Rows.Clear();
                             sumaTotal = 0;//SE REINICIA LA VENTA PARA QUE SE SALGA DEL IF DE LA VENTA
 
@@ -411,7 +415,7 @@ namespace PoS
         }
         private void btnDescuento_Click(object sender, EventArgs e)
         {
-            calibrado();
+            //calibrado();
             if (btnDescuento != null)
             {
                 descuento = (sumaTotal * 10) / 100;
@@ -468,21 +472,21 @@ namespace PoS
                 lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
             }
         }
-        private void calibrado()
-        {
-            try
-            {
-                Ticket ticket = new Ticket();
-                ticket.AddSubHeaderLine(DateTime.Now.ToShortDateString().ToString());
-                ticket.AddSubHeaderLine(DateTime.Now.ToShortTimeString().ToString());
-                ticket.AddFooterLine("GRACIAS POR SU COMPRA");
-                ticket.PrintTicket("EC-PM-5890X");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IMPRESORA NO CONECTADA. ");
-            }
-        }
+        //private void calibrado()
+        //{
+        //    try
+        //    {
+        //        Ticket ticket = new Ticket();
+        //        ticket.AddSubHeaderLine(DateTime.Now.ToShortDateString().ToString());
+        //        ticket.AddSubHeaderLine(DateTime.Now.ToShortTimeString().ToString());
+        //        ticket.AddFooterLine("GRACIAS POR SU COMPRA");
+        //        ticket.PrintTicket("EC-PM-5890X");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show("IMPRESORA NO CONECTADA. ");
+        //    }
+        //}
         //-------------------------------------REGION DE LOS BOTONES DE LA CALCULADORA------------------------
         #region
         private void btn1_Click(object sender, EventArgs e)
@@ -606,10 +610,51 @@ namespace PoS
             {
                 txtCodigo.Text = txtCodigo.Text.Substring(0, txtCodigo.Text.Length - 1);
             }
-            else 
+            else
             {
-                txtCodigo.Text = ""; 
+                txtCodigo.Text = "";
             }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int proCant, proPre, proTot, pos = 160;
+            string proNom;
+
+            //System.Drawing.Image img = System.Drawing.Image.FromFile("C:\Users\aneth\Downloads\ChangarroLogo.jpg");
+            //Point loc = new Point(Top, Top);
+            //e.Graphics.DrawImage(img, loc);
+            Bitmap myBitmap1 = new Bitmap(pictureBoxLogo.Width, pictureBoxLogo.Height);
+            pictureBoxLogo.DrawToBitmap(myBitmap1, new Rectangle(50,50, pictureBoxLogo.Width, pictureBoxLogo.Height));
+            e.Graphics.DrawImage(myBitmap1, 0, 0, 207, pictureBoxLogo.Height);
+            e.Graphics.DrawString("BURGUER'S DABNEE", new Font("Arial",8), Brushes.Black, new Point(0,0));
+            e.Graphics.DrawString("CANT. NOMBRE PRECIO TOTAL", new Font("Arial", 8), Brushes.Red, new Point(10, 140));
+            foreach (DataGridViewRow row in dataGridProductos.Rows)
+            {
+                proCant = Convert.ToInt32(row.Cells[0].Value);
+                proNom = "" + row.Cells[1].Value;
+                proPre = Convert.ToInt32(row.Cells[2].Value);
+                proTot = Convert.ToInt32(row.Cells[3].Value);
+                e.Graphics.DrawString("" + proCant, new Font("Arial", 10), Brushes.Black, new Point(15, pos));
+                e.Graphics.DrawString("" + proNom, new Font("Arial", 6), Brushes.Black, new Point(50, pos));
+                e.Graphics.DrawString("" + proPre, new Font("Arial", 10), Brushes.Black, new Point(100, pos));
+                e.Graphics.DrawString("" + proTot, new Font("Arial", 10), Brushes.Black, new Point(160, pos));
+                pos = pos + 20;
+            }
+            double sumaticket = 0;
+            foreach (DataGridViewRow row in dataGridProductos.Rows)
+            {
+                DataGridViewCell cell = row.Cells[3];
+                if (cell.Value != null)
+                {
+                    double total = double.Parse(cell.Value.ToString());
+                    sumaticket += total;
+                }
+                //lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
+            }
+            e.Graphics.DrawString("Total: $" + sumaticket, new Font("Arial", 15, FontStyle.Bold), Brushes.Black, new Point(60, pos + 50));
+            e.Graphics.DrawString(HoraFecha.Text, new Font("Arial", 6), Brushes.Black, new Point(Left, 550));
+            pos = 160;
         }
     }
 
