@@ -44,7 +44,7 @@ namespace PoS
 
             //colocamos un fondo
             this.BackColor = SystemColors.Menu;
-
+            #region
             //ESTABLECEMOS EL LEABLE DANDOLE LA HORA Y FECHA. 
             HoraFecha.Text = DateTime.Now.ToLongTimeString() + " " + DateTime.Now.ToLongDateString();
             HoraFecha.Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Bold);
@@ -151,8 +151,9 @@ namespace PoS
             btnSecreto.Text = "ENTER";
             btnPunto.Font = new Font("Microsoft Sans Serif", 40F);
             btnSecreto.AutoSize = true;
+            #endregion
 
-
+            #region
             //AÑADIMOS COLUMNAS, NOMBRES, EDITAMOS EL ESTILO Y DETERMINAMOS EL TAMAÑO
             //INICIAMOS ESTABLECIENDO LAS PROPIEDADES DE CANTIDAD. 
             dataGridProductos.Columns.Add("Cantidad", "Cantidad");//Aqui añadimos las columnas. 
@@ -234,6 +235,7 @@ namespace PoS
             dataGridProductos.DefaultCellStyle.Font = new Font("Arial", 18);
 
         }
+        #endregion
         //Personalizamos el lable de hora y fecha según la hora y fecha del sistema, esta se actualiza. 
         private void time_Tick(object sender, EventArgs e)
         {
@@ -472,21 +474,6 @@ namespace PoS
                 lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
             }
         }
-        //private void calibrado()
-        //{
-        //    try
-        //    {
-        //        Ticket ticket = new Ticket();
-        //        ticket.AddSubHeaderLine(DateTime.Now.ToShortDateString().ToString());
-        //        ticket.AddSubHeaderLine(DateTime.Now.ToShortTimeString().ToString());
-        //        ticket.AddFooterLine("GRACIAS POR SU COMPRA");
-        //        ticket.PrintTicket("EC-PM-5890X");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("IMPRESORA NO CONECTADA. ");
-        //    }
-        //}
         //-------------------------------------REGION DE LOS BOTONES DE LA CALCULADORA------------------------
         #region
         private void btn1_Click(object sender, EventArgs e)
@@ -620,10 +607,6 @@ namespace PoS
         {
             int proCant, proPre, proTot, pos = 160;
             string proNom;
-
-            //System.Drawing.Image img = System.Drawing.Image.FromFile("C:\Users\aneth\Downloads\ChangarroLogo.jpg");
-            //Point loc = new Point(Top, Top);
-            //e.Graphics.DrawImage(img, loc);
             Bitmap myBitmap1 = new Bitmap(pictureBoxLogo.Width, pictureBoxLogo.Height);
             pictureBoxLogo.DrawToBitmap(myBitmap1, new Rectangle(50,50, pictureBoxLogo.Width, pictureBoxLogo.Height));
             e.Graphics.DrawImage(myBitmap1, 0, 0, 207, pictureBoxLogo.Height);
@@ -650,7 +633,6 @@ namespace PoS
                     double total = double.Parse(cell.Value.ToString());
                     sumaticket += total;
                 }
-                //lableTotal.Text = "Total $ " + Math.Round(sumaTotal, 2).ToString();
             }
             e.Graphics.DrawString("Total: $" + sumaticket, new Font("Arial", 15, FontStyle.Bold), Brushes.Black, new Point(60, pos + 50));
             e.Graphics.DrawString(HoraFecha.Text, new Font("Arial", 6), Brushes.Black, new Point(Left, 550));
