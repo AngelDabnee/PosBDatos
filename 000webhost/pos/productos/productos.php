@@ -10,7 +10,8 @@
     <h1>Productos</h1>
     <?php
     /*Establecemos la conexión a la BD con Mysql */
-    $conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
+    //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
+    $conn = new mysqli("localhost","root","","pos")  
     or die("Por alguna razón no nos pudimos conectar al servidor");
     /*ESTABLECEMOS LAS VARIABLES DE COMANDO */
     $sqlqueryselect = "SELECT * FROM productos;";/*COMANDO SELECT PARA PODER BUSCAR*/
@@ -30,7 +31,7 @@
                     <td>".$registro["codigo"]."</td>
                     <td>\n\t".$registro["nombre"]."</td>
                     <td>\n\t".$registro["precio"]."</td>
-                    <td> <img src = '../img/delete_icon.png'</td> 
+                    <td><a href = 'delete.php?codigo={$registro['codigo']}'><img src = '../img/delete_icon.png'></a></td>
                     <td> <img src = '../img/update_icon.png'</td>
                 </tr>\n");
         }echo "</table>";
