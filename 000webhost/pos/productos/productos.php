@@ -8,6 +8,10 @@
 </head>
 <body bgcolor ="ccd5ae">
     <h1>Productos</h1>
+    Productos 
+    <a href = "../usuarios/usuarios.php">USUARIOS</a>
+    
+    
     <?php
     /*Establecemos la conexión a la BD con Mysql */
     //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
@@ -32,7 +36,7 @@
                     <td>\n\t".$registro["nombre"]."</td>
                     <td>\n\t".$registro["precio"]."</td>
                     <td><a href = 'delete.php?codigo={$registro['codigo']}'><img src = '../img/delete_icon.png'></a></td>
-                    <td> <img src = '../img/update_icon.png'</td>
+                    <td><a href = 'update.php?codigo={$registro['codigo']}'><img src = '../img/update_icon.png'></a></td>
                 </tr>\n");
         }echo "</table>";
     }

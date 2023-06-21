@@ -4,7 +4,7 @@
 
     try {
         //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
-        $conn = new mysqli("localhost","root",".","pos");
+        $conn = new mysqli("localhost","root","","pos");
         $sqlqueryselect = "INSERT INTO productos(codigo,nombre,precio) VALUE("."'".$_POST['codigo']."'".','."'".$_POST['nombre']."'".','.$_POST['precio'].");";
         $comando = mysqli_query($conn , $sqlqueryselect);
         header('Location: productos.php');
