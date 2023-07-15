@@ -1,3 +1,7 @@
+<?php
+    include ("../inc/function.php");
+    validarUsuario(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +15,8 @@
     Productos Usuarios
     <?php
     /*Establecemos la conexión a la BD con Mysql */
-    //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
-    $conn = new mysqli("localhost","root","","pos")  
-    or die("Por alguna razón no nos pudimos conectar al servidor");
+    $conn = new mysqli("localhost","root","","pos");
+    //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos");
     /*ESTABLECEMOS LAS VARIABLES DE COMANDO */
     $sqlqueryselect = "SELECT * FROM usuarios;";/*COMANDO SELECT PARA PODER BUSCAR*/
     $comando = mysqli_query($conn , $sqlqueryselect);

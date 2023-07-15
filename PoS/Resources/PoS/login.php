@@ -1,3 +1,6 @@
+<?php
+    include ("./inc/function.php");
+?>
 <html lang="en">
  <head>
     <meta charset="UTF-8">
@@ -13,11 +16,11 @@
         <form action="validar.php" method="post">
             <!---este input es para correo--->           
             <div class = "username">
-                <input type="email" name="correo" placeholder="Correo Electrónico" value="a@gmail.com" required><br>
+                <input type="email" name="correo" placeholder="Correo Electrónico" value="" required><br>
             </div>
             <!---este input es para password--->
             <div class = "username">
-                <input type="password" name="password" placeholder ="Contraseña" value="123" required><br>
+                <input type="password" name="password" placeholder ="Contraseña" value="" required><br>
             </div>
             <!---este input es para login--->
             <div class = "recordar">

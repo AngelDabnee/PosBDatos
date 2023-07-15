@@ -1,5 +1,6 @@
 <?php
     include ("../inc/function.php");
+    validarUsuario(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,8 @@
     <?php
     menu();
     /*Establecemos la conexión a la BD con Mysql */
-    //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos") 
-    $conn = new mysqli("localhost","root","","pos")  
-    or die("Por alguna razón no nos pudimos conectar al servidor");
+    $conn = new mysqli("localhost","root","","pos");
+    //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos");
     /*ESTABLECEMOS LAS VARIABLES DE COMANDO */
     $sqlqueryselect = "SELECT * FROM usuarios;";/*COMANDO SELECT PARA PODER BUSCAR*/
     $comando = mysqli_query($conn , $sqlqueryselect);
@@ -45,7 +45,7 @@
                     <td>\n\t".$registro["email"]."</td>
                     <td>\n\t".$registro["contra"]."</td>
                     <td>\n\t".$registro["curp"]."</td>
-                    <td>\n\t".$registro["imagen"]."</td>
+                    <td><img src = '".$registro['imagen']."' width = '65px' height = '55px' ></td>
                     <td><a href = 'deleteUsuarios.php?id={$registro['id']}'><img src = '../img/delete_icon.png'></a></td>
                     <td><a href = 'updateUsuarios.php?id={$registro['id']}'><img src = '../img/update_icon.png'></a></td>
                 </tr>\n");

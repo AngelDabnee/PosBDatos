@@ -1,5 +1,6 @@
 <?php
-    include ("inc/function.php");
+    include ('./inc/function.php');
+    validarUsuario();     
 ?>
 <html lang="en">
 <head>

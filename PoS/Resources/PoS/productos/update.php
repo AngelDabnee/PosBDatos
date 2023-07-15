@@ -1,3 +1,7 @@
+<?php
+    include ("../inc/function.php");
+    validarUsuario(); 
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +12,8 @@
     <center><t1 style = "font-size:50px">Actualizar</t1></center>
     <?php
         $codigo = $_GET['codigo'];
-        $conn = new mysqli("localhost","root","","pos")  
-        or die("Por alguna razón no nos pudimos conectar al servidor");
+        $conn = new mysqli("localhost","root","","pos");
+        //$conn = new mysqli("localhost","id20924409_angeldabnee","AngelDabnee123.","id20924409_pos");
         /*ESTABLECEMOS LAS VARIABLES DE COMANDO */
         $sqlqueryselect = "SELECT * FROM productos WHERE codigo = '$codigo';";
         $comando = mysqli_query($conn , $sqlqueryselect);
